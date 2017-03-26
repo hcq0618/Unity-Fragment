@@ -1,6 +1,8 @@
 # Unity-Fragment
 用于UGUI界面间的跳转 类似Android中的Fragment
 
+build in Unity 5.3.4f
+
 ## 用法
 1.FragmentManager挂在Canvas上
 
