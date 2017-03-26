@@ -201,6 +201,12 @@ namespace Fragments
 
         public bool HandleBackPressed()
         {
+            // 点击事件被禁用时 返回键事件也要被禁用
+            if (GetRayCastManager().isBlocking)
+            {
+                return true;
+            }
+
             Fragment activeFragment = GetTopFragment();
             bool isConsumed = activeFragment != null && activeFragment.OnBackPressed();
 
@@ -211,12 +217,12 @@ namespace Fragments
                 if (previousFragment == null)
                 {
                     //应用退出
-                    ApplicationQuit(activeFragment);
+                    ApplicationQuit();
                 }
                 else
                 {
                     //fragment返回
-                    Hide(activeFragment.IsDoAnimationOnBackPressed());
+                    Exit(activeFragment.IsDoAnimationOnBackPressed());
                 }
             }
 
@@ -229,15 +235,10 @@ namespace Fragments
             return this;
         }
 
-        void ApplicationQuit(Fragment activeFragment)
+        void ApplicationQuit()
         {
             Action ApplicationQuitAction = delegate
             {
-                if (activeFragment != null)
-                {
-                    activeFragment.isPendingApplicationQuit = true;
-                }
-
                 GetFragmentAnimator().DoApplicationQuitAnimation(Application.Quit);
             };
 
@@ -292,20 +293,20 @@ namespace Fragments
 
         #region 显示
 
-        public void Show(ref Fragment nextFragment)
+        public void Enter(ref Fragment nextFragment)
         {
-            Show(ref nextFragment, true);
+            Enter(ref nextFragment, true);
         }
 
-        public void Show(ref Fragment nextFragment, bool isDoAnimation)
+        public void Enter(ref Fragment nextFragment, bool isDoAnimation)
         {
             FragmentIntent intent = new FragmentIntent();
             intent.isDoAnimation = isDoAnimation;
 
-            Show(ref nextFragment, intent);
+            Enter(ref nextFragment, intent);
         }
 
-        public void Show(ref Fragment nextFragment, FragmentIntent intent)
+        public void Enter(ref Fragment nextFragment, FragmentIntent intent)
         {
             Fragment activeFragment = GetTopFragment();
 
@@ -321,12 +322,12 @@ namespace Fragments
                     }
 
                     //不在显示栈中要进栈
-                    ShowSpecificFragment(ref nextFragment, !isInStack);
+                    EnterSpecificFragment(ref nextFragment, !isInStack);
 
                     break;
                 case FragmentIntent.FLAG_NEW_INSTANCE:
 
-                    ShowSpecificFragment(ref nextFragment, true);
+                    EnterSpecificFragment(ref nextFragment, true);
 
                     break;
                 case FragmentIntent.FLAG_SINGLE_INSTANCE:
@@ -337,7 +338,7 @@ namespace Fragments
                         FragmentExitStack(nextFragment, false);
                     }
 
-                    ShowSpecificFragment(ref nextFragment, true);
+                    EnterSpecificFragment(ref nextFragment, true);
 
                     break;
             }
@@ -348,17 +349,17 @@ namespace Fragments
             {
                 GetFragmentAnimator().DoAnimation(nextFragment, activeFragment, () =>
                 {
-                    HideSpecificFragment(activeFragment, false);
+                    ExitSpecificFragment(activeFragment, false);
                 });
             }
             else
             {
-                HideSpecificFragment(activeFragment, false);
+                ExitSpecificFragment(activeFragment, false);
             }
         }
 
         //显示某一个
-        void ShowSpecificFragment(ref Fragment specificFragment, bool addToStack)
+        void EnterSpecificFragment(ref Fragment specificFragment, bool addToStack)
         {
             if (specificFragment != null)
             {
@@ -433,23 +434,23 @@ namespace Fragments
             //}
         }
 
-        public Fragment Show(string gameObjectName)
+        public Fragment Enter(string gameObjectName)
         {
-            return Show(gameObjectName, true);
+            return Enter(gameObjectName, true);
         }
 
-        public Fragment Show(string gameObjectName, bool isDoAnimation)
+        public Fragment Enter(string gameObjectName, bool isDoAnimation)
         {
             FragmentIntent intent = new FragmentIntent();
             intent.isDoAnimation = isDoAnimation;
 
-            return Show(gameObjectName, intent);
+            return Enter(gameObjectName, intent);
         }
 
-        public Fragment Show(string gameObjectName, FragmentIntent intent)
+        public Fragment Enter(string gameObjectName, FragmentIntent intent)
         {
             Fragment nextFragment = FindFragmentByName(gameObjectName);
-            Show(ref nextFragment, intent);
+            Enter(ref nextFragment, intent);
 
             return nextFragment;
         }
@@ -458,34 +459,34 @@ namespace Fragments
 
         #region 隐藏
 
-        public void Hide(Fragment specificFragment)
+        public void Exit(Fragment specificFragment)
         {
-            Hide(specificFragment, true);
+            Exit(specificFragment, true);
         }
 
-        public void Hide(Fragment specificFragment, bool isDoAnimation)
+        public void Exit(Fragment specificFragment, bool isDoAnimation)
         {
             Fragment previousFragment = GetPreviousFragment();
 
             //先要显示上一个 让界面加载出来 再显示动画
-            ShowSpecificFragment(ref previousFragment, false);
+            EnterSpecificFragment(ref previousFragment, false);
 
             if (isDoAnimation)
             {
                 GetFragmentAnimator().DoAnimation(previousFragment, specificFragment, () =>
                 {
-                    HideSpecificFragment(specificFragment, true);
+                    ExitSpecificFragment(specificFragment, true);
                 });
             }
             else
             {
-                HideSpecificFragment(specificFragment, true);
+                ExitSpecificFragment(specificFragment, true);
             }
 
         }
 
         //隐藏某一个
-        void HideSpecificFragment(Fragment specificFragment, bool removeFromStack)
+        void ExitSpecificFragment(Fragment specificFragment, bool removeFromStack)
         {
             if (specificFragment != null)
             {
@@ -506,29 +507,29 @@ namespace Fragments
             }
         }
 
-        public Fragment Hide(string gameObjectName)
+        public Fragment Exit(string gameObjectName)
         {
-            return Hide(gameObjectName, true);
+            return Exit(gameObjectName, true);
         }
 
-        public Fragment Hide(string gameObjectName, bool isDoAnimation)
+        public Fragment Exit(string gameObjectName, bool isDoAnimation)
         {
             Fragment oldFragment = FindFragmentByName(gameObjectName);
-            Hide(oldFragment, isDoAnimation);
+            Exit(oldFragment, isDoAnimation);
 
             return oldFragment;
         }
 
-        public Fragment Hide()
+        public Fragment Exit()
         {
-            return Hide(true);
+            return Exit(true);
         }
 
-        public Fragment Hide(bool isDoAnimation)
+        public Fragment Exit(bool isDoAnimation)
         {
             //隐藏当前的
             Fragment activeFragment = GetTopFragment();
-            Hide(activeFragment, isDoAnimation);
+            Exit(activeFragment, isDoAnimation);
 
             return activeFragment;
         }

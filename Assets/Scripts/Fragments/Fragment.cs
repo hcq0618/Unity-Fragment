@@ -6,9 +6,6 @@ namespace Fragments
     [DisallowMultipleComponent]
     public abstract class Fragment : BaseBehaviour
     {
-        //是否正在退出应用
-        protected internal bool isPendingApplicationQuit;
-
         #region life cycle
 
         //子类重载 进栈时回调 为了区分OnEnable时不同逻辑
