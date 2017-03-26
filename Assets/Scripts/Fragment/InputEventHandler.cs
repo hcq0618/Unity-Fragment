@@ -1,7 +1,7 @@
 // Created by hcq
 using UnityEngine;
 
-namespace Fragments
+namespace UnityFragment
 {
     public class InputEventHandler
     {

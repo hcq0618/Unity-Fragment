@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace Fragments
+namespace UnityFragment
 {
     [DisallowMultipleComponent]
     public class FragmentAnimator : BaseBehaviour, IFragmentAnimator

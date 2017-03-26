@@ -1,7 +1,7 @@
 ﻿// hcq 2017/3/26
 using System;
 
-namespace Fragments
+namespace UnityFragment
 {
     public interface IFragmentAnimator
     {

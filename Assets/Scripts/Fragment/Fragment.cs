@@ -1,7 +1,7 @@
 // Created by hcq
 using UnityEngine;
 
-namespace Fragments
+namespace UnityFragment
 {
     [DisallowMultipleComponent]
     public abstract class Fragment : BaseBehaviour

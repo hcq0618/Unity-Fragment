@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-namespace Fragments
+namespace UnityFragment
 {
     [DisallowMultipleComponent]
     public sealed class FragmentManager : BaseBehaviour

@@ -1,7 +1,7 @@
 ﻿// hcq 2017/3/26
 using UnityEngine;
 
-namespace Fragments
+namespace UnityFragment
 {
     public class BaseBehaviour : MonoBehaviour
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 
-namespace Fragments
+namespace UnityFragment
 {
     public static class Utils
     {

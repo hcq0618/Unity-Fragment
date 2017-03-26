@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace Fragments
+namespace UnityFragment
 {
     [DisallowMultipleComponent]
     public class FragmentRayCastManager : BaseBehaviour
