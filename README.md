@@ -42,10 +42,7 @@ OnLongBackPressed：长按返回键时回调
 
 静态Fragment：在Scene中已经存在的物体上继承Fragment的实现脚本，第一个可见物体上的Fragment被认为是默认显示的界面。
 
-动态Fragment：在编辑器中的FragmentManager脚本上配置界面的任意个Prefab，每个Prefab认为是一个界面，初始化时需要手动显示默认显示的界面。
-
-
-
+动态Fragment：在编辑器中的FragmentManager脚本上配置界面的任意个Prefab，每个Prefab认为是一个界面，初始化时需要手动显示默认显示的界面。需要再TagManager中添加名为“UnInstantiateFragment”的tag
 
 **支持多种Fragment启动模式**
 
