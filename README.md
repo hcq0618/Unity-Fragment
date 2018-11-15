@@ -5,38 +5,55 @@ Use for switching UGUI pages, just like Fragment in Android.
 build in Unity 5.3.4f
 
 
+
 ## 用法
 1.FragmentManager挂在Canvas上
+
   FragmentManager script bind on your Canvas.
 
 2.每个界面的根物体上挂继承Fragment的实现脚本
+
   The root object's script in every page should implement Fragment script.
+
 
 
 ## Fragment
 **Fragment中包含生命周期的回调：**
 
 OnEnterStack：
+
 fragment进栈时回调, 可以用于实现与OnEnable不同的逻辑
+
 The method will callback when a fragment enter the stack, this use for implement logic that different with OnEnable method.
 
 OnExitStack：
+
 fragment出栈时回调, 可以用于实现与OnDisable不同的逻辑
+
 The method will callback when a fragment exit the stack, this use for implement logic that different with OnDisable method.
 
 OnIntent：
+
 通过FragmentIntent启动fragment时回调, 可用于界面跳转时传些数据
+
 The method will callback when start a fragment by FragmentIntent, this use for pass data when pages switch.
 
 DoExitAnimation：
+
 可以在这里实现界面退出动画
+
 You can override this method to implement animation when a fragment exit.
 
 DoEnterAnimation：
+
 可以在这里实现界面进入动画
+
 You can override this method to implement animation when a fragment enter.
 
-OnDynamicInstantiated：fragment动态加载时回调
+OnDynamicInstantiated：
+
+fragment动态加载时回调
+
 The method will callback when dynamic loading a fragment.
 
 
