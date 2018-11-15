@@ -20,37 +20,37 @@ build in Unity 5.3.4f
 ## Fragment
 **Fragment中包含生命周期的回调：**
 
-OnEnterStack：
+**OnEnterStack：**
 
 fragment进栈时回调, 可以用于实现与OnEnable不同的逻辑
 
 The method will callback when a fragment enter the stack, this use for implement logic that different with OnEnable method.
 
-OnExitStack：
+**OnExitStack：**
 
 fragment出栈时回调, 可以用于实现与OnDisable不同的逻辑
 
 The method will callback when a fragment exit the stack, this use for implement logic that different with OnDisable method.
 
-OnIntent：
+**OnIntent：**
 
 通过FragmentIntent启动fragment时回调, 可用于界面跳转时传些数据
 
 The method will callback when start a fragment by FragmentIntent, this use for pass data when pages switch.
 
-DoExitAnimation：
+**DoExitAnimation：**
 
 可以在这里实现界面退出动画
 
 You can override this method to implement animation when a fragment exit.
 
-DoEnterAnimation：
+**DoEnterAnimation：**
 
 可以在这里实现界面进入动画
 
 You can override this method to implement animation when a fragment enter.
 
-OnDynamicInstantiated：
+**OnDynamicInstantiated：**
 
 fragment动态加载时回调
 
@@ -59,19 +59,19 @@ The method will callback when dynamic loading a fragment.
 
 **Fragment中包含按键时的回调**
 
-OnBackPressed：
+**OnBackPressed：**
 按返回键时回调
 The method will callback when Back key pressed.
 
-OnMenuPressed：
+**OnMenuPressed：**
 按菜单键时回调
 The method will callback when Menu key pressed.
 
-OnHomePressed：
+**OnHomePressed：**
 按Home键时回调
 The method will callback when Home key pressed.
 
-OnLongBackPressed：
+**OnLongBackPressed：**
 长按返回键时回调
 The method will callback when Back key long pressed.
 
@@ -80,11 +80,16 @@ The method will callback when Back key long pressed.
 
 **支持两种形式的Fragment**
 
-静态Fragment：在Scene中已经存在的物体上继承Fragment的实现脚本，第一个可见物体上的Fragment被认为是默认显示的界面。
+**静态Fragment：**
+
+在Scene中已经存在的物体上继承Fragment的实现脚本，第一个可见物体上的Fragment被认为是默认显示的界面。
 
 Static Fragment: A script implement Fragment script on a exist object in a scene, and the default page which the first visible fragment will show.
 
-动态Fragment：在编辑器中的FragmentManager脚本上配置界面的任意个Prefab，每个Prefab认为是一个界面，初始化时需要手动显示默认显示的界面。需要在TagManager中添加名为“UnInstantiateFragment”的tag
+
+**动态Fragment：**
+
+在编辑器中的FragmentManager脚本上配置界面的任意个Prefab，每个Prefab认为是一个界面，初始化时需要手动显示默认显示的界面。需要在TagManager中添加名为“UnInstantiateFragment”的tag
 
 Dynamic Fragment: The FragmentManager in the editor should setup page's any Prefab, every Prefab is know as a page,
 The default display page needs to be manually displayed during initialization.
@@ -97,15 +102,18 @@ A tag called "UnInstantiateFragment" needs to be added to the TagManager.
 效果与安卓中activity启动模式一样
 The effect is the same as in android's activity startup mode
 
-FLAG_NEW_INSTANCE：
+**FLAG_NEW_INSTANCE：**
+
 以一个新的Fragment实例启动
 Start with a new Fragment instance
 
-FLAG_CLEAR_TOP：
+**FLAG_CLEAR_TOP：**
+
 若栈中存在该Fragment实例, 则将栈顶的其他Fragment实例都清空, 并将该Fragment实例置顶并显示
 If the Fragment instance exists on the stack, then all the other Fragment instances on the top of the stack are cleared and the Fragment instance is placed on the top and displayed.
 
-FLAG_SINGLE_INSTANCE：
+**FLAG_SINGLE_INSTANCE：**
+
 若栈中存在该Fragment实例, 则将该Fragment实例置顶并显示
 If the Fragment instance exists on the stack, the Fragment instance is placed on top and displayed.
 
